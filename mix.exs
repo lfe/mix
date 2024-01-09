@@ -1,13 +1,13 @@
 defmodule MixLfe.MixProject do
   use Mix.Project
 
-  @version "0.2.0-rc3"
+  @version "0.3.0"
 
   def project do
     [
       app: :mix_lfe,
       version: @version,
-      elixir: "~> 1.6",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       description: "A LFE compiler for Mix",
       compilers: Mix.compilers() ++ [:lfe],
@@ -36,10 +36,10 @@ defmodule MixLfe.MixProject do
 
   def deps do
     [
-      {:lfe, "~> 1.2"},
-      {:ltest, "0.10.0-rc6"},
-      {:color, "~> 1.0", hex: :erlang_color},
-      {:lutil, "~> 0.10.0-rc6"},
+      {:lfe, "~> 2.1.3"},
+      {:ltest, github: "John-Goff/ltest", branch: "release/0.13.x"},
+      {:erlang_color, "~> 1.0"},
+      # {:lutil, "~> 0.14.3"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

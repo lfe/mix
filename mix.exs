@@ -36,7 +36,7 @@ defmodule MixLfe.MixProject do
 
   def deps do
     [
-      {:lfe, "~> 2.1.3"},
+      {:lfe, "~> 2.1.3", manager: :make},
       {:ltest, github: "John-Goff/ltest", branch: "release/0.13.x"},
       {:erlang_color, "~> 1.0"},
       # {:lutil, "~> 0.14.3"},

@@ -1,6 +1,5 @@
 %{
   "earmark_parser": {:hex, :earmark_parser, "1.4.39", "424642f8335b05bb9eb611aa1564c148a8ee35c9c8a8bba6e129d51a3e3c6769", [:mix], [], "hexpm", "06553a88d1f1846da9ef066b87b57c6f605552cfbe40d20bd8d59cc6bde41944"},
-  "erlang_color": {:hex, :erlang_color, "1.0.0", "145fe1d2e65c4516e4f03fefca6c2f47ebad5899d978d70382a5cfe643e4ac9e", [:rebar3], [], "hexpm", "6b17e5e589c8fef540574c9ea32b67cec2c8a44283aafe474d6e5818fb3ee038"},
   "ex_doc": {:hex, :ex_doc, "0.31.1", "8a2355ac42b1cc7b2379da9e40243f2670143721dd50748bf6c3b1184dae2089", [:mix], [{:earmark_parser, "~> 1.4.39", [hex: :earmark_parser, repo: "hexpm", optional: false]}, {:makeup_c, ">= 0.1.1", [hex: :makeup_c, repo: "hexpm", optional: true]}, {:makeup_elixir, "~> 0.14", [hex: :makeup_elixir, repo: "hexpm", optional: false]}, {:makeup_erlang, "~> 0.1", [hex: :makeup_erlang, repo: "hexpm", optional: false]}], "hexpm", "3178c3a407c557d8343479e1ff117a96fd31bafe52a039079593fb0524ef61b0"},
   "lfe": {:hex, :lfe, "2.1.3", "6efcb2bbc1ffc21dc5d1c092f00efdb397eac889474ac5c86edf78a3557cc730", [:rebar3], [], "hexpm", "4e4bad515a169ae418feb7374ea1c8d741faea9d95e266ce343b45bcc377f55b"},
   "ltest": {:git, "https://github.com/John-Goff/ltest.git", "d7fc14aa3437dead4989edb59ae24111244635df", [branch: "release/0.13.x"]},

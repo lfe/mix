@@ -23,7 +23,10 @@ defmodule Mix.Compilers.Lfe do
 
       outdir = output |> Path.dirname() |> ErlangCompiler.to_erl_file()
 
-      compile_result(:lfe_comp.file(ErlangCompiler.to_erl_file(input), [{:outdir, outdir}, :return, :report]))
+      input
+      |> ErlangCompiler.to_erl_file()
+      |> :lfe_comp.file([{:outdir, outdir}, :return, :report])
+      |> compile_result()
     end
 
     ErlangCompiler.compile(manifest, mappings, :lfe, :beam, opts, callback)

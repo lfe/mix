@@ -36,9 +36,10 @@ defmodule MixLfe.MixProject do
 
   def deps do
     [
-      {:lfe, "~> 2.1.3", manager: :make},
-      {:ltest, github: "John-Goff/ltest", branch: "release/0.13.x"},
-      # {:lutil, "~> 0.14.3"},
+      {:lfe, "~> 2.1",
+       compile: "make compile install-include install-beam install-bin PREFIX=$ERL_LIBS/lfe",
+       override: true},
+      {:ltest, github: "John-Goff/ltest", branch: "rebar3"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

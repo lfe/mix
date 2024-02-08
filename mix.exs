@@ -45,7 +45,7 @@ defmodule MixLfe.MixProject do
       {:lfe, "~> 2.1",
        compile: "make compile install-include install-beam install-bin PREFIX=$ERL_LIBS/lfe",
        override: true},
-      {:ltest, github: "John-Goff/ltest", branch: "rebar3"},
+      {:ltest, github: "John-Goff/ltest", branch: "behaviour-returns-list"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

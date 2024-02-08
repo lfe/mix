@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Compile.Lfe do
   use Mix.Task.Compiler
-  import Mix.Compilers.Lfe
+  alias Mix.Compilers.Lfe
 
   @recursive true
   @manifest "compile.lfe"
@@ -34,7 +34,7 @@ defmodule Mix.Tasks.Compile.Lfe do
   defp do_run(opts) do
     dest = Mix.Project.compile_path()
 
-    compile(manifest(), [{"src", dest}], opts)
+    Lfe.compile(manifest(), [{"src", dest}], opts)
   end
 
   @doc """
@@ -45,7 +45,7 @@ defmodule Mix.Tasks.Compile.Lfe do
   @doc """
   Cleans up compilation artifacts.
   """
-  def clean, do: clean(manifest())
+  def clean, do: Lfe.clean(manifest())
 
   defp manifest, do: Path.join(Mix.Project.manifest_path(), @manifest)
 end

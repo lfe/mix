@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Lfe.Test do
   use Mix.Task.Compiler
-  import Mix.Compilers.Lfe
+  alias Mix.Compilers.Lfe
 
   @recursive true
   @manifest "test.lfe"
@@ -47,7 +47,7 @@ defmodule Mix.Tasks.Lfe.Test do
     File.rmdir(dest_test)
     File.mkdir_p!(dest_test)
 
-    compile(manifest(), [{"src", dest}, {"test", dest_test}], opts)
+    Lfe.compile(manifest(), [{"src", dest}, {"test", dest_test}], opts)
 
     File.cd(dest)
 

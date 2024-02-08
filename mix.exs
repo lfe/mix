@@ -22,6 +22,12 @@ defmodule MixLfe.MixProject do
     ]
   end
 
+  def cli do
+    [
+      preferred_envs: ["lfe.test": :test]
+    ]
+  end
+
   def application do
     [extra_applications: [:logger, :eunit]]
   end

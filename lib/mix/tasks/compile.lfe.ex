@@ -28,10 +28,6 @@ defmodule Mix.Tasks.Compile.Lfe do
   """
   def run(args) do
     {opts, _, _} = OptionParser.parse(args, switches: @switches)
-    do_run(opts)
-  end
-
-  defp do_run(opts) do
     dest = Mix.Project.compile_path()
 
     Lfe.compile(manifest(), [{"src", dest}], opts)

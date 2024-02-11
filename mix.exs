@@ -15,7 +15,7 @@ defmodule MixLfe.MixProject do
         extras: ["README.md"],
         main: "readme",
         source_ref: "v#{@version}",
-        source_url: "https://github.com/meddle0x53/mix_lfe"
+        source_url: "https://github.com/lfe/mix"
       ],
       package: package(),
       deps: deps()
@@ -35,8 +35,8 @@ defmodule MixLfe.MixProject do
   def package do
     %{
       licenses: ["Apache 2"],
-      links: %{"GitHub" => "https://github.com/meddle0x53/mix_lfe"},
-      maintainers: ["Nikolay Tsvetinov (Meddle)"]
+      links: %{"GitHub" => "https://github.com/lfe/mix"},
+      maintainers: ["Nikolay Tsvetinov (Meddle)", "John Goff"]
     }
   end
 

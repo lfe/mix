@@ -6,6 +6,7 @@ defmodule Mix.Tasks.Lfe.Test do
   @manifest "test.lfe"
   @switches [force: :boolean, all_warnings: :boolean]
   @preferred_cli_env :test
+  @requirements ["app.config"]
 
   @shortdoc "Runs a LFE project's tests"
 

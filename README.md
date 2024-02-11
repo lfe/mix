@@ -10,29 +10,19 @@ Also Elixir developers should try LFE! This little project has the purpose to ma
 
 ## Installation and setup
 
-Install the Mix plugin for LFE if it isn't installed already:
+First you must have a mix project setup:
 
 ```
-mix archive.install https://github.com/meddle0x53/mix_lfe_new/releases/download/v0.2.0/mix_lfe_new-0.2.0.ez
+mix new <project_name>
 ```
 
-You can create a LFE project with:
+You can then add `mix_lfe` to your project dependencies in `mix.exs`:
 
-```
-mix lfe.new <project_name>
-```
-
-The project uses the rebar3 `lfe` package to compile LFE source files, so the following will be necessary:
-
-1. Navigate to the root of the new project with `cd <project_name>`.
-2. Run `mix lfe.setup`.
-
-This will install the LFE compiler and set it up, so it can be used to compile `*.lfe` files located in the `src` folder.
-
-The project can be created and set up in one command like this:
-
-```
-mix lfe.new <project_name> --setup
+```elixir
+def deps do
+  [
+    {:mix_lfe, github: "lfe/mix", branch: "master", only: [:dev, :test], runtime: false}
+  ]
 ```
 
 ## Compilation
@@ -46,7 +36,7 @@ mix compile
 To use the compiled modules with the LFE REPL, you can run:
 
 ```
-./deps/lfe/bin/lfe -pa _build/dev/lib/*/ebin
+mix lfe
 ```
 
 The compiled LFE modules can be used from Elixir too:
@@ -72,7 +62,7 @@ Works with umbrella applications, meaning that some of applications in the umbre
 
 A list of projects created with `mix_lfe`. More to come.
 
-* [Echo](https://github.com/meddle0x53/echo) is an example LFE OTP application, created with mix_lfe.
+* [Echo](https://github.com/meddle0x53/echo) is an example LFE OTP application, created with an outdated version of mix_lfe.
 
 ## TODO
 
@@ -82,9 +72,10 @@ All works well, but requires some manual work and doesn't support LFE compiler f
 
 1. Pass more options to the LFE compiler, using mix configuration.
 2. More and more examples.
-3. A mix task or binary running the LFE REPL in the context of the compiled artifacts.
-4. Add CI to this project.
-5. Make it possible to add options when running `mix lfe.test`. Work on making stable versions by using another test runner/library or contacting the `ltest` maintainers.
+3. Add CI to this project.
+4. Make it possible to add options when running `mix lfe.test`.
+5. Run ltest tests from exunit or possibly vice versa.
+6. Figure out how to use Elixir macros from LFE and vice versa.
 
 ## License
 

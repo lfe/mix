@@ -25,6 +25,18 @@ def deps do
   ]
 ```
 
+You also need to add `lfe` to the `compilers` section of your mix project:
+
+```elixir
+def project do
+  [
+    ...
+    compilers: Mix.compilers() ++ [:lfe],
+    ...
+  ]
+end
+```
+
 ## Compilation
 
 Compiling `*.lfe` sources, located in the `src` folder can be done with:

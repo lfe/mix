@@ -74,6 +74,7 @@ Works with umbrella applications, meaning that some of applications in the umbre
 
 A list of projects created with `mix_lfe`. More to come.
 
+* [LfePlug](https://github.com/John-Goff/lfe_plug/) is an example of using LFE to create a [Plug](https://hexdocs.pm/plug).
 * [Echo](https://github.com/meddle0x53/echo) is an example LFE OTP application, created with an outdated version of mix_lfe.
 
 ## TODO

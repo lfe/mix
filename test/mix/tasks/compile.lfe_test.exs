@@ -22,7 +22,6 @@ defmodule Mix.Tasks.Compile.LfeTest do
       Mix.env(:dev)
       Mix.Task.clear()
       Mix.Shell.Process.flush()
-      Mix.ProjectStack.clear_cache()
       Mix.ProjectStack.clear_stack()
 
       delete_tmp_paths()

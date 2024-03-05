@@ -15,24 +15,29 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
-    name: Build and test
+  test:
+    name: Run tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        elixir: [1.16.1, 1.16.0, 1.15.7, 1.14.5]
+        otp: [26.2.2, 26.1.2, 26.0.2, 25.3.2.9, 24.3.4.16]
+
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Elixir
-      uses: erlef/setup-beam@61e01a43a562a89bfc54c7f9a378ff67b03e4a21 # v1.16.0
+    - name: Check out code
+      uses: actions/checkout@v4
+    - name: Set up Elixir and Erlang
+      uses: erlef/setup-beam@v1
       with:
-        elixir-version: '1.16.1' # [Required] Define the Elixir version
-        otp-version: '26.2'      # [Required] Define the Erlang/OTP version
+        otp-version: ${{ matrix.otp }}
+        elixir-version: ${{ matrix.elixir }}
     - name: Restore dependencies cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
+        key: ${{ runner.os }}-elixir-${{ matrix.elixir }}-otp-${{ matrix.otp }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-elixir-${{ matrix.elixir }}-otp-${{ matrix.otp }}-mix-
     - name: Install dependencies
       run: mix deps.get
     - name: Run tests

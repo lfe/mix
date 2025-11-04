@@ -33,19 +33,20 @@ defmodule MixLfe.MixProject do
   end
 
   def package do
-    %{
+    {
+      name: "lfe_mix", % Note: the LFE community does not control the mix_lfe package on hex.pm
       licenses: ["Apache 2"],
       links: %{"GitHub" => "https://github.com/lfe/mix"},
-      maintainers: ["Nikolay Tsvetinov (Meddle)", "John Goff"]
+      maintainers: ["Nikolay Tsvetinov (Meddle)", "John Goff", "Duncan McGreggor"]
     }
   end
 
   def deps do
     [
-      {:lfe, "~> 2.1",
+      {:lfe, "~> 2.2",
        compile: "make compile install-include install-beam install-bin PREFIX=$ERL_LIBS/lfe",
        override: true},
-      {:ltest, "~> 0.13.6"},
+      {:ltest, "~> 0.13"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

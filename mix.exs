@@ -34,7 +34,7 @@ defmodule MixLfe.MixProject do
 
   def package do
     {
-      name: "lfe_mix", % Note: the LFE community does not control the mix_lfe package on hex.pm
+      name: "lfe_mix", # Note: the LFE community does not control the mix_lfe package on hex.pm
       licenses: ["Apache 2"],
       links: %{"GitHub" => "https://github.com/lfe/mix"},
       maintainers: ["Nikolay Tsvetinov (Meddle)", "John Goff", "Duncan McGreggor"]

@@ -20,9 +20,52 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        elixir: ['1.19', '1.18', '1.17', '1.16', '1.15', '1.14']
-        otp: ['28', '27', '26', '25', '24']
+        include:
+          # Elixir 1.19
+          - elixir: '1.19'
+            otp: '28'
+          - elixir: '1.19'
+            otp: '27'
+          - elixir: '1.19'
+            otp: '26'
 
+          # Elixir 1.18
+          - elixir: '1.18'
+            otp: '27'
+          - elixir: '1.18'
+            otp: '26'
+          - elixir: '1.18'
+            otp: '25'
+
+          # Elixir 1.17
+          - elixir: '1.17'
+            otp: '27'
+          - elixir: '1.17'
+            otp: '26'
+          - elixir: '1.17'
+            otp: '25'
+
+          # Elixir 1.16
+          - elixir: '1.16'
+            otp: '26'
+          - elixir: '1.16'
+            otp: '25'
+          - elixir: '1.16'
+            otp: '24'
+
+          # Elixir 1.15
+          - elixir: '1.15'
+            otp: '26'
+          - elixir: '1.15'
+            otp: '25'
+          - elixir: '1.15'
+            otp: '24'
+
+          # Elixir 1.14
+          - elixir: '1.14'
+            otp: '25'
+          - elixir: '1.14'
+            otp: '24'
 
     steps:
     - name: Check out code

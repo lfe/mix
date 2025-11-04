@@ -7,7 +7,17 @@ defmodule Mix.Compilers.Lfe.Dependencies do
   Returns a list of dependency names (atoms) that contain LFE source files.
   """
   def discover_lfe_deps do
-    Mix.Project.deps_paths()
+    discover_lfe_deps(Mix.Project.deps_paths())
+  end
+
+  @doc """
+  Discovers all LFE dependencies from the provided deps_paths map.
+  Returns a list of dependency names (atoms) that contain LFE source files.
+
+  The deps_paths should be a map of dependency names to paths: %{dep_name: "/path/to/dep", ...}
+  """
+  def discover_lfe_deps(deps_paths) do
+    deps_paths
     |> Enum.filter(&has_lfe_sources?/1)
     |> Enum.map(fn {dep_name, _path} -> dep_name end)
   end
@@ -38,15 +48,26 @@ defmodule Mix.Compilers.Lfe.Dependencies do
   Source is in deps/, destination is in _build/<env>/lib/
   """
   def dep_compile_paths(dep_name) do
-    case Mix.Project.deps_paths()[dep_name] do
-      nil -> 
+    dep_compile_paths(dep_name, Mix.Project.deps_paths())
+  end
+
+  @doc """
+  Returns the source and destination paths for compiling a dependency's LFE files
+  using the provided deps_paths map.
+  Source is in deps/, destination is in _build/<env>/lib/
+
+  The deps_paths should be a map of dependency names to paths: %{dep_name: "/path/to/dep", ...}
+  """
+  def dep_compile_paths(dep_name, deps_paths) do
+    case deps_paths[dep_name] do
+      nil ->
         nil
-      
+
       dep_path ->
         src = Path.join(dep_path, "src")
         # Output should go to build directory, not deps directory
         dest = Path.join([Mix.Project.build_path(), "lib", to_string(dep_name), "ebin"])
-        
+
         if File.dir?(src) do
           {src, dest}
         else
@@ -99,7 +120,17 @@ defmodule Mix.Compilers.Lfe.Dependencies do
   def topological_sort(lfe_deps) do
     # Build dependency graph
     graph = build_dependency_graph(lfe_deps)
-    
+    topological_sort(lfe_deps, graph)
+  end
+
+  @doc """
+  Returns a topologically sorted list of LFE dependencies using the provided graph.
+  Dependencies are ordered so that each dep appears after all its dependencies.
+
+  The graph should be a map where keys are dependency names and values are lists
+  of their dependencies: %{dep_a: [:dep_b, :dep_c], dep_b: [], ...}
+  """
+  def topological_sort(_lfe_deps, graph) do
     # Perform topological sort using Kahn's algorithm
     kahn_sort(graph)
   end
@@ -194,12 +225,12 @@ defmodule Mix.Compilers.Lfe.Dependencies do
   defp kahn_sort(graph) do
     # Calculate in-degrees
     in_degrees = calculate_in_degrees(graph)
-    
+
     # Find nodes with no incoming edges
-    queue = 
+    queue =
       Enum.filter(graph, fn {node, _} -> Map.get(in_degrees, node, 0) == 0 end)
       |> Enum.map(fn {node, _} -> node end)
-    
+
     # Perform the sort
     do_kahn_sort(graph, in_degrees, queue, [])
   end
@@ -227,7 +258,7 @@ defmodule Mix.Compilers.Lfe.Dependencies do
     Enum.reduce(graph, %{}, fn {node, neighbors}, degrees ->
       # Ensure the node exists in degrees
       degrees = Map.put_new(degrees, node, 0)
-      
+
       # Increment in-degree for each neighbor
       Enum.reduce(neighbors, degrees, fn neighbor, deg ->
         Map.update(deg, neighbor, 1, &(&1 + 1))

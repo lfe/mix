@@ -16,6 +16,9 @@ defmodule Mix.Compilers.Lfe do
   It supports the options of the Erlang Mix compiler under the covers as it is used.
   """
   def compile(manifest, [{_, _} | _] = mappings, opts) do
+    # Ensure the build lib path is in the code path for -include_lib directives
+    ensure_lib_path_in_code_path()
+    
     callback = fn input, output ->
       module = input |> Path.basename(".lfe") |> String.to_atom()
       :code.purge(module)
@@ -30,6 +33,14 @@ defmodule Mix.Compilers.Lfe do
     end
 
     ErlangCompiler.compile(manifest, mappings, :lfe, :beam, opts, callback)
+  end
+
+  defp ensure_lib_path_in_code_path do
+    lib_path = Path.join(Mix.Project.build_path(), "lib") |> String.to_charlist()
+    
+    unless lib_path in :code.get_path() do
+      :code.add_patha(lib_path)
+    end
   end
 
   @doc """

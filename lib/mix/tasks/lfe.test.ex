@@ -2,6 +2,8 @@ defmodule Mix.Tasks.Lfe.Test do
   use Mix.Task.Compiler
   alias Mix.Compilers.Lfe
 
+  @compile {:no_warn_undefined, :ltest}
+
   @recursive true
   @manifest "test.lfe"
   @switches [force: :boolean, all_warnings: :boolean]

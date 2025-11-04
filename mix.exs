@@ -46,7 +46,7 @@ defmodule MixLfe.MixProject do
       {:lfe, "~> 2.2",
        compile: "make compile install-include install-beam install-bin PREFIX=$ERL_LIBS/lfe",
        override: true},
-      {:ltest, "~> 0.13"},
+      {:ltest, "~> 0.13", compile: false, app: false},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
